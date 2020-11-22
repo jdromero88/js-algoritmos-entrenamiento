@@ -28,10 +28,17 @@
 //
 // 19:05:45
 
-let s = "07:05:45PM";
+// let s = "12:01:00PM";
+// Return '12:01:00'
+
+// let s = "12:01:00AM";
+// Return '00:01:00'
+
+
+// let s = "07:05:45PM";
 // let s = "12:05:45AM";
-// let s = "07:05:45AM";
-let expectedResult = "19:05:45";
+let s = "12:05:45pM";
+// let expectedResult = "19:05:45";
 let hh = "";
 let mmSS = "";
 let amORpm = "";
@@ -43,10 +50,19 @@ function timeConversion(s) {
 }
 
 function convertHours(hh, amORpm){
-  if (amORpm == "A") {
-    return "00"
+  if (amORpm == "A") { // check if is AM or PM
+    if (hh == 12) { // if time is 12 AM we return 00
+      return "00"
+    }
+    if(hh < 10){
+      return "0" + hh // if time is before 10 am we need to add 0 in front.
+    }
+    return hh // this means time is between 10 and 11 so we just return the same hour.
   }
-  return hh + 12
+  if (hh > 11) {
+    return hh // return the same hour we dont need to add anything to convert
+  }
+  return hh + 12 // we add 12 to convert the hour into pm format.
 }
 
 console.log(timeConversion(s));
